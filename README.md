@@ -41,6 +41,10 @@ For while, just for ORM (ODM coming soon).
         git=git://github.com/rafaelgou/CoregenThemeBootstrapBundle.git
         target=bundles/Coregen/ThemeBootstrapBundle
 
+    [CoregenAdminBundle]
+        git=git://github.com/rafaelgou/CoregenAdminBundle.git
+        target=bundles/Coregen/AdminBundle
+
 
 (add to deps file and run `./bin/vendors install`)
 
@@ -130,7 +134,6 @@ Or as you want.
 ### Security
 
 On *app/config/config.yml*, add
-
 
     fos_user:
         db_driver: orm
