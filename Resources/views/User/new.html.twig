@@ -1,0 +1,37 @@
+{% extends generator.layoutTheme |default('ThemeBootstrapBundle')  ~ '::layout.html.twig' %}
+{% block title %}{{ generator.new.title | trans }} {% endblock %}
+
+{% block content %}
+
+    <div class="page-header">
+        <h1>{{ generator.new.title | trans }}
+            <small>
+                {% trans %}or{% endtrans %} <a href="{{ path(generator.route) }}">{% trans %}go back to list{% endtrans %}</a>
+            </small>
+        </h1>
+    </div>
+
+    <form action="{{ path(generator.route ~ '_create') }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
+        {{ form_errors(form) }}
+        {% for fieldName, field in generator.newDisplayFields %}
+            {% block form %}{% endblock %}
+            {% include 'CoregenAdminBundle:User:_form.html.twig' %}
+        {% endfor %}
+        {{ form_row(form._token) }}
+        <div class="actions">
+            {% if generator.new.actions.save %}
+            <button type="submit" class="btn primary" name="form_save" value="true">{% trans %}Save{% endtrans %}</button>&nbsp;
+            {% endif %}
+            {% if generator.new.actions.save_and_add %}
+            <button type="submit" class="btn primary" name="form_save_and_add" value="true">{% trans %}Save and Add{% endtrans %}</button>&nbsp;
+            {% endif %}
+            {% if generator.new.actions.back_to_list %}
+            <a href="{{ path(generator.route) }}" class="btn">
+                {% trans %}Back to List{% endtrans %}
+            </a>
+            {% endif %}
+        </div>
+
+    </form>
+
+{% endblock %}

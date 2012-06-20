@@ -1,0 +1,41 @@
+{% extends generator.layoutTheme |default('ThemeBootstrapBundle')  ~ '::layout.html.twig' %}
+{% block title %}{{ generator.show.title | trans }} {% endblock %}
+
+{% block content %}
+    <div class="page-header">
+        <h1>{{ generator.show.title | trans }}
+            <small>
+                {% trans %}or{% endtrans %}
+                <a href="{{ path(generator.route) }}">{% trans %}go back to list{% endtrans %}</a>
+            </small>
+        </h1>
+    </div>
+
+    <form>
+
+        {% for fieldName, field in generator.showDisplayFields %}
+        <div class="clearfix">
+            <label for="xlInput">{{ field.label | trans  }}</label>
+            <div class="input">
+            {% if field.date_format is defined %}
+                <p>{{ generator.renderField(fieldName, record) | date(field.date_format) }}</p>
+            {% else %}
+                {% if fieldName == 'message' %}
+                    <td>{{ generator.renderField(fieldName, record) | markdown }}</td>
+                {% else %}
+                    <p>{{ generator.renderField(fieldName, record) }}</p>
+                {% endif %}
+            {% endif %}
+            </div>
+        </div><!-- /clearfix -->
+        {% endfor %}
+
+    </form>
+
+    <div class="actions">
+        <a href="{{ path(generator.route) }}" class="btn">
+            {% trans %}Back to List{% endtrans %}
+        </a>
+    </div>
+
+{% endblock %}

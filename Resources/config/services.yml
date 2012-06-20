@@ -1,0 +1,11 @@
+parameters:
+#    coregen_admin.example.class: Coregen\AdminBundle\Example
+
+services:
+    coregen.logger:
+        class:        Coregen\AdminBundle\Logger\Logger
+        arguments:    [@doctrine, @security.context]
+
+    coregen_user.util.user_manipulator:
+        class:        Coregen\AdminBundle\Util\UserManipulator
+        arguments:    [@fos_user.user_manager]

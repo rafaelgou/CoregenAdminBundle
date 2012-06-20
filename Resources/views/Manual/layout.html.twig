@@ -1,0 +1,14 @@
+{% extends 'CoregenAdminBundle::layout.html.twig' %}
+{% block title %}Manual{% endblock %}
+{% block content %}
+    <div class="markdown">
+    <h1>Manual</h1>
+        {% block markdown %}{% endblock %}
+    </div>
+    <style>
+    body {  }
+    .markdown { width: 600px; margin: 30px auto; }
+    </style>
+{% endblock %}
+
+

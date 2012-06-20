@@ -1,0 +1,64 @@
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <div class="nav-collapse collapse">
+
+
+            <ul class="nav">
+                <li class="active">
+                    <a href="{{ path('CoregenAdminBundle_homepage') }}">Home</a>
+                </li>
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle">Menu</a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="">Submenu 1</a>
+                            </li>
+                            <li>
+                                <a href="">Submenu 2</a>
+                            </li>
+                        </ul>
+                </li>
+
+{% endif %}
+            </ul>
+            <ul class="nav secondary-nav pull-right">
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" style="color:#F1D031">{{ app.user.username }}</a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="{{ path('fos_user_change_password') }}">{{ 'change_password.submit'|trans({}, 'FOSUserBundle') }}</a>
+                        </li>
+                    </ul>
+                </li>
+
+    {% if is_granted('ROLE_ADMIN') %}
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle">Sistema</a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="{{ path('user') }}">{% trans%}Users{% endtrans %}</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('log') }}">Log</a>
+                        </li>
+                    </ul>
+                </li>
+    {% endif %}
+
+                <li>
+                    <a href="{{ path('fos_user_security_logout') }}">{% trans %}Logout{% endtrans %}</a>
+                </li>
+{% else %}
+                <li>
+                    <a href="{{ path('fos_user_security_login') }}">{% trans %}Login{% endtrans %}</a>
+                </li>
+{% endif %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>

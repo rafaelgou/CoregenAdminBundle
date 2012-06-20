@@ -1,0 +1,14 @@
+CoregenAdminBundle_homepage:
+    pattern:  /
+    defaults: { _controller: CoregenAdminBundle:Default:index }
+
+CoregenAdminBundleUser:
+    resource: "@CoregenAdminBundle/Resources/config/routing/user.yml"
+    prefix:   /user
+
+CoregenAdminBundleLog:
+    resource: "@CoregenAdminBundle/Resources/config/routing/log.yml"
+    prefix:   /log
+
+
+

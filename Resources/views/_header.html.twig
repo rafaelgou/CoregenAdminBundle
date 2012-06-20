@@ -1,0 +1,13 @@
+    <header style="height: 50px;">
+{% set types = ['notice','error','success','info'] %}
+{% for type in types %}
+    {% if app.session.hasFlash(type) %}
+<div id="flash" style="display:none;margin-top:50px;" class="alert-message"></div>
+<script type="text/javascript" >
+//<![CDATA[
+    setFlashMessage('{{ type }}', '{{ app.session.flash(type) | trans }}', 10000, true);
+//]]>
+</script>
+    {% endif %}
+{% endfor %}
+    </header>

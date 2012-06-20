@@ -1,0 +1,13 @@
+# Password change
+change_password.submit: Alterar senha
+change_password.flash.success: A senha foi alterada.
+change_password.flash.error: Algum campo não foi preenchido adequadamente.
+The entered password is invalid.: A senha informada é inválida.
+
+Users: Usuários
+Username: Usuário
+Password: Senha
+Confirm: Confirmar
+password_first: Nova Senha
+password_second: Repetir Senha
+Enabled: Ativo

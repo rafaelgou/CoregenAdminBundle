@@ -1,0 +1,47 @@
+{% block filterForm %}
+
+        <!-- Filter -->
+        <div class="span4 columns">
+
+            <form action="{{ path('admin_log') }}" method="get" {{ form_enctype(logFilterForm) }} class="form-stacked">
+                {{ form_errors(logFilterForm) }}
+                <fieldset>
+                    <legend>{% trans %}Filtrar{% endtrans %}</legend>
+
+                    {{ form_widget(logFilterForm) }}
+
+{#
+                    <div class="clearfix">
+                        {{ form_label(logFilterForm.type) }}
+                        <div class="input">
+                            {{ form_widget(logFilterForm.type) }}
+                        </div>
+                    </div>
+
+                    <div class="clearfix">
+                        {{ form_label(logFilterForm.user) }}
+                        <div class="input">
+                            {{ form_widget(logFilterForm.user) }}
+                        </div>
+                    </div>
+
+                    <div class="clearfix">
+                        {{ form_label(logFilterForm.sort) }}
+                        <div class="input">
+                            {{ form_widget(logFilterForm.sort) }}
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                    </div>
+#}
+                {{ form_widget(logFilterForm._token) }}
+
+                <div class="actions">
+                    <button type="submit" class="btn primary">Pesquisar</button>
+                    <a href="{{ path('admin_log') }}" class="btn">Limpar</a>
+                </div>
+                </fieldset>
+            </form>
+
+
+{% endblock %}

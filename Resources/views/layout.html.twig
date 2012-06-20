@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>{% block title %}{% endblock %}</title>
+
+{% include 'ThemeBootstrapBundle::_head.html.twig' %}
+{% block add_stylesheet %}{% endblock %}
+{% block add_javascript %}{% endblock %}
+        <link rel="stylesheet" href="{{ asset('bundles/coregenadmin/css/main.css') }}" type="text/css" media="screen" />
+
+    </head>
+
+    <body>
+
+    <div id="loading" style="display:none">Loading...</div>
+
+{% include 'CoregenAdminBundle::_nav.html.twig' %}
+
+    <div id="main_container" class="container{% if fluid is defined %}-fluid{% endif %}">
+
+{% include "ThemeBootstrapBundle::_header.html.twig" %}
+{% include "CoregenAdminBundle::_header.html.twig" %}
+
+{% block content %}{% endblock %}
+{% block fos_user_content %}{% endblock fos_user_content %}
+
+{% include "CoregenAdminBundle::_footer.html.twig" %}
+
+    </div>
+
+    <div id="dialog_form"></div>
+
+    </body>
+</html>

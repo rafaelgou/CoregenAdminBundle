@@ -1,0 +1,13 @@
+    <footer class="span12">
+        <hr/>
+        <a href="{{  path(site_url | default ('CoregenAdminBundle_homepage')) }}" title="{{ site_description | default('Your site description')  }}">
+         <strong>{{ site_description | default('Coregen Admin')  }}</strong>
+        </a> &Vert;
+        &reg;{{ "now" | date('Y') }}
+        <a href="{{  path(owner_url | default ('CoregenAdminBundle_homepage')) }}" title="{{ owner_description | default('Site Owner')  }}">
+          {{ owner_description | default('Coregen')  }}
+        </a>
+    </footer>
+
+
+

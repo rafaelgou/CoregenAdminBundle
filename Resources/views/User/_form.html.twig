@@ -1,0 +1,20 @@
+{% form_theme form 'ThemeBootstrapBundle:Form:form_div_layout.html.twig' %}
+{% block form %}
+    {% if fieldName == 'password' %}
+        {% if macro is not defined %}
+            {% import 'ThemeBootstrapBundle:Form:macro.html.twig' as macro %}
+        {% endif %}
+
+        <div class="control-group">
+            {{ form_label(form[fieldName], field.label) }}
+            <div class="controls {{ macro.hasErrors(form[fieldName]) }}">
+                {{ form_widget(form.password.first, { 'attr': {'class': field.class ~ ' ' ~ field.size} }) }}
+                {{ 'password_second'|trans }}
+                {{ form_widget(form.password.second, { 'attr': {'class': field.class ~ ' ' ~ field.size} }) }}
+                {{ form_errors(form[fieldName]) }}
+            </div>
+        </div>
+    {% else %}
+        {{ form_row(form[fieldName], {'attr': {'field': field}} ) }}
+    {% endif %}
+{% endblock %}

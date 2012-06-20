@@ -1,0 +1,110 @@
+{% extends generator.layoutTheme |default('ThemeBootstrapBundle')  ~ '::layout.html.twig' %}
+{% block title %}{{ generator.list.title | trans }} {% endblock %}
+
+{% block content %}
+
+    <div class="page-header">
+        <h1>
+            {{ generator.list.title | trans }}
+            <small>
+{% if pager.count == 0  %}
+                    ({% trans %}no records{% endtrans %})
+{% elseif   pager.count == 1  %}
+                    ({% trans %}1 record{% endtrans %})
+{% else %}
+                    ({{ pager.count }} {% trans %}records{% endtrans %})
+{% endif %}
+            </small>
+        </h1>
+    </div>
+
+{% if pager.count == 0  %}
+
+    <div class="row">
+        <div class="span12 columns">
+            <div id="no_records" class="alert-message warning">
+                <p>
+                    {% trans %}No records found. You can filter again.{% endtrans %}
+                </p>
+            </div>
+        </div>
+
+        {% if filter_form %}
+        {% include 'CoregenThemeBootstrapBundle:Coregen:_filterForm.html.twig' %}
+        {% endif %}
+    </div>
+
+{% else %}
+    <div class="row">
+
+        <!-- List -->
+        <div class="span12 columns">
+            <div>
+                <table class="zebra-striped" id="sortTableExample">
+                    <thead>
+                        <tr>
+                            {% for field in generator.listDisplayFields %}
+                            <th>{{ field.label | trans  }}</th>
+                            {% endfor %}
+                            <th>{% trans %}Actions{% endtrans %}</th>
+                        </tr>
+                   </thead>
+                    <tbody>
+                        {% for record in pager.getResults %}
+                        <tr>
+                            {% for fieldName, field in generator.listDisplayFields %}
+
+                                {% if field.list_partial is defined %}
+                                    <td>{% include field.list_partial %}</td>
+
+                                {% elseif field.date_format is defined %}
+                                    {% set data = generator.renderField(fieldName, record) %}
+                                    {% if data %}
+                                        <td>{{ generator.renderField(fieldName, record) | date(field.date_format) }}</td>
+                                    {% else %}
+                                        <td>&nbsp;</td>
+                                    {% endif %}
+                                {% else %}
+                                    {% set data = generator.renderField(fieldName, record) %}
+                                    {% if field.raw is defined and  field.raw %}
+                                        {% set data = data | raw %}
+                                    {% endif %}
+                                    {% if field.trans is defined and field.trans%}
+                                        {% set data = data | trans %}
+                                    {% endif %}
+                                        <td>{{ data }}</td>
+
+                                {% endif %}
+                            {% endfor %}
+                            <td>
+                                <a href="{{ path(generator.route ~ '_show', { 'id': generator.renderField('id', record)}) }}">
+                                    {% trans %}View{% endtrans %}
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="row">
+
+                <div class="span5 columns batch_action"></div>
+{% block paginator %}{% endblock %}
+{% include 'CoregenThemeBootstrapBundle:Coregen:_paginator.html.twig' %}
+
+            </div>
+
+        </div>
+
+    {% if filter_form %}
+    {% include 'CoregenThemeBootstrapBundle:Coregen:_filterForm.html.twig' %}
+    {% endif %}
+
+    </div>
+{% endif %}
+
+{% endblock %}
+
+
+
